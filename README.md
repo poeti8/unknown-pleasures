@@ -1,6 +1,6 @@
 ## UNKNOWN PLEASURES
 
-a tiny web experiment built with three.js, react three fiber, webgl and gsap to visualize music.
+a tiny web experiment built with **three.js**, **react three fiber**, **webgl** and **gsap** to visualize music.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/23660003/229427381-250b805a-d465-4e66-9274-60c3b5b863b4.gif" alt="demo" />
