@@ -1,0 +1,493 @@
+:root {
+  font-family: Arial, sans-serif;
+  line-height: 24px;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #021119;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-size: 16px;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  place-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #021119;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 500px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+}
+
+#root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 80px;
+  height: 80px;
+  transform: scale(0);
+  border-radius: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0);
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.loader-wrapper {
+  position: absolute;
+  top: -30px;
+  left: -30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.loader-wrapper p {
+  margin-right: -4px;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.loader {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 8px solid;
+  border-color: rgba(255, 255, 255, 0.15) rgba(255, 255, 255, 0.25)
+    rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.5);
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#intro {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 9%;
+  left: 0;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#intro > * {
+  margin: 0;
+  padding: 0;
+}
+
+#intro h1 {
+  position: absolute;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  line-height: 1.7;
+  opacity: 0;
+}
+
+#intro p {
+  position: absolute;
+  opacity: 0;
+  margin-top: -0.5rem;
+}
+
+#start {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  bottom: 20%;
+  left: 0;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+}
+
+@media screen and (max-width: 500px) {
+  #start {
+    bottom: 17%;
+  }
+}
+
+button {
+  position: relative;
+  outline: none;
+  display: flex;
+  align-items: center;
+  background-color: #021119;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  padding: 0.7rem 1.7rem 0.7rem;
+  font-size: 0.65rem;
+  border-radius: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.04rem;
+  opacity: 1;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.5s ease 0.1s;
+}
+
+button.playing {
+  cursor: default;
+}
+
+button svg {
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-right: 0.6rem;
+  margin-bottom: 1px;
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.8);
+  transition: all 0.8s ease 0.1s;
+}
+
+button:before {
+  position: absolute;
+  content: "";
+  top: 3px;
+  left: -4px;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: 1px solid white;
+  z-index: -1;
+  opacity: 0.3;
+  transition: all 0.5s ease-out;
+}
+
+button:after {
+  position: absolute;
+  content: "";
+  top: 7px;
+  left: -8px;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: 1px solid white;
+  z-index: -2;
+  opacity: 0.2;
+  transition: all 0.5s ease-out 0.2s;
+}
+
+button:hover {
+  background-color: white;
+  color: #021119;
+  padding-right: 2.2rem;
+  padding-left: 2.2rem;
+  opacity: 1;
+}
+
+button:hover svg {
+  padding-right: 0.2rem;
+  stroke: #021119;
+}
+
+button:hover:before {
+  top: 1px;
+  left: -2px;
+  opacity: 0.4;
+}
+
+button:hover:after {
+  top: 3px;
+  left: -4px;
+  opacity: 0.4;
+}
+
+button,
+button:before,
+button:after {
+  border-radius: 20px;
+}
+
+footer {
+  position: absolute;
+  width: 100vw;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  padding: 16px 24px 16px;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 12px;
+  align-items: flex-end;
+  letter-spacing: 0.01em;
+  line-height: 1.7;
+  opacity: 0;
+}
+
+@media screen and (max-width: 500px) {
+  footer {
+    font-size: 11px;
+    padding: 0 12px 8px;
+  }
+}
+
+footer a {
+  color: rgba(255, 255, 255, 0.5);
+  border: none;
+  text-decoration: none;
+  transition: color 0.3s ease-out;
+}
+
+footer a:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+footer #source {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+footer #source p {
+  padding: 0;
+  margin: 0;
+}
+
+footer #credits {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+footer #credits p {
+  padding: 0;
+  margin: 0;
+}
+
+.reset-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  background-color: #021119;
+  opacity: 0;
+  z-index: 9999;
+}
+
+.texts {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.texts.stage-three {
+  width: 450px;
+  padding: 0.3rem 0;
+  font-size: 16px;
+  background-color: transparent;
+  letter-spacing: 0.25rem;
+  text-align: center;
+  opacity: 0;
+  display: none;
+}
+
+@media screen and (max-width: 500px) {
+  .texts.stage-three {
+    font-size: 13px;
+    letter-spacing: 0.15rem;
+  }
+}
+
+.texts.stage-four {
+  position: absolute;
+  bottom: 0;
+  left: 50px;
+  width: 250px;
+  font-size: 14px;
+  line-height: 1.6;
+  letter-spacing: 0.2rem;
+  text-align: right;
+  color: rgba(255, 255, 255, 0.9);
+  opacity: 0;
+  transform: translateY(-50px);
+  display: none;
+}
+
+.texts.stage-four.but-emotions-wont-grow {
+  top: -350px;
+}
+
+.texts.stage-four.and-were-changing-our-ways {
+  top: -220px;
+}
+
+@media screen and (max-width: 600px) {
+  .texts.stage-four.stage-four {
+    font-size: 12px;
+    letter-spacing: 0.12rem;
+    left: -70px;
+  }
+
+  .texts.stage-four.but-emotions-wont-grow {
+    top: -290px;
+  }
+
+  .texts.stage-four.and-were-changing-our-ways {
+    top: -180px;
+  }
+}
+
+.texts.stage-five {
+  opacity: 0;
+  display: none;
+}
+
+.texts.then-love {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15px;
+  letter-spacing: 0.2rem;
+  text-align: center;
+}
+
+.texts.love-will-tear-us-aprat {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%) scale(0.1, 0.1);
+  font-size: 15px;
+  letter-spacing: 0.2rem;
+  text-align: center;
+}
+
+.texts.again {
+  font-size: 16px;
+  letter-spacing: 0.25rem;
+  text-align: center;
+  transform: translate(-50%);
+}
+
+.texts.love {
+  font-size: 18px;
+  letter-spacing: 0.3rem;
+  text-align: center;
+  transform: translate(-50%) scale(0.1, 0.1);
+}
+
+.stage-five-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(2, 17, 25, 0.5);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(2, 17, 25, 0.1),
+    rgba(2, 17, 25, 0.3),
+    rgba(2, 17, 25, 0.5)
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  display: none;
+  z-index: 99;
+}
+
+.texts.love-will-tear-us-aprat-2 {
+  font-size: 18px;
+  letter-spacing: 0.4rem;
+  text-align: center;
+}
+
+.stage-five-wrapper button {
+  margin-top: 2rem;
+}
+
+#again-btn-wrapper {
+  display: none;
+  opacity: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .texts.then-love {
+    font-size: 12px;
+    letter-spacing: 0.12rem;
+  }
+
+  .texts.love-will-tear-us-aprat {
+    font-size: 13px;
+    letter-spacing: 0.13rem;
+  }
+
+  .texts.again {
+    font-size: 13px;
+    letter-spacing: 0.15rem;
+  }
+
+  .texts.love {
+    font-size: 14px;
+    letter-spacing: 0.2rem;
+  }
+
+  .texts.love-will-tear-us-aprat-2 {
+    font-size: 13px;
+    letter-spacing: 0.25rem;
+  }
+
+  .stage-five-wrapper button {
+    margin-top: 1.5rem;
+    transform: scale(0.95);
+  }
+}
