@@ -19,3 +19,7 @@ you need [node.js](https://nodejs.org) and [pnpm](https://pnpm.io/) package mana
 3. visit `http://localhost:5173/unknown-pleasures`
 
 this is my first experience with the mentioned technologies in an attempt to learn 3d web graphics. you might see some hacky wacky stuff in the code since i don't really know what i'm doing.
+
+## tutorial
+
+i've made a step-by-step video. [watch it on youtube](https://www.youtube.com/watch?v=7eDGJ5okDGw). 
